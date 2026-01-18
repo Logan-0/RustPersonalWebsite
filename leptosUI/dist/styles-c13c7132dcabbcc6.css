@@ -1,0 +1,1913 @@
+/* ========================================
+   CSS CUSTOM PROPERTIES (Variables)
+   ======================================== */
+
+:root {
+  /* Color Palette */
+  --color-primary-bg: #A2AC94;
+  /* Main background green */
+  --color-primary-dark: #3E4437;
+  /* Dark green/gray */
+  --color-accent: #809C52;
+  /* Accent green */
+  --color-white: #ffffff;
+  --color-hover-orange: orangered;
+  --color-hover-brown: saddlebrown;
+  --color-active-gray: slategray;
+  --color-focus-tomato: tomato;
+
+  /* Typography */
+  --font-cursive: "Pacifico", cursive;
+  --font-body: "NationalPark", sans-serif;
+  --font-size-base: calc(15px + 0.390625vw);
+  --font-size-h1: 2em;
+  --font-size-h1-large: 6em;
+  --font-size-nav: 1.5em;
+  --font-size-nav-desktop: 2em;
+  --font-size-link: 0.73em;
+  --font-size-body: 0.93em;
+  --font-size-button: 1.2em;
+
+  /* Spacing */
+  --spacing-xs: 0.5em;
+  --spacing-sm: 1em;
+  --spacing-md: 2em;
+  --spacing-lg: 2.5em;
+  --spacing-xl: 5em;
+
+  /* Spacing - Percentages */
+  --spacing-1: 1%;
+  --spacing-2: 2%;
+  --spacing-5: 5%;
+  --spacing-10: 10%;
+  --spacing-15: 15%;
+  --spacing-80: 80%;
+  --spacing-100: 100%;
+
+  /* Layout */
+  --container-padding: 15px;
+  --viewport-height: 100vh;
+  --viewport-width: 100vw;
+
+  /* Breakpoints (for reference in media queries) */
+  --breakpoint-small: 641px;
+  /* Small tablet / Large phone landscape */
+  --breakpoint-medium: 768px;
+  /* Tablet portrait */
+  --breakpoint-large: 1024px;
+  /* Small desktop / Tablet landscape */
+  --breakpoint-xl: 1280px;
+  /* Desktop */
+  --breakpoint-2xl: 1440px;
+  /* Large desktop */
+  --breakpoint-3xl: 1536px;
+  /* Larger desktop */
+  --breakpoint-4k: 1920px;
+  /* Full HD */
+  --breakpoint-qhd: 2560px;
+  /* QHD/2K */
+  --breakpoint-uhd: 3840px;
+  /* 4K UHD */
+  --breakpoint-medium: 768px;
+  /* Tablet / Mobile-Desktop switch */
+  --breakpoint-large: 1024px;
+  /* Desktop */
+  --breakpoint-xlarge: 1440px;
+  /* Large Desktop */
+
+  /* Transitions */
+  --transition-standard: all 0.3s ease;
+  --transition-fast: all 0.15s ease-in-out;
+
+  /* Border Radius */
+  --border-radius: 0.25rem;
+
+  /* Form Input Padding */
+  --input-padding-y: 0.375rem;
+  --input-padding-x: 0.75rem;
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  position: relative;
+  top: 0;
+}
+
+body {
+  font-size: var(--font-size-base);
+  font-family: var(--font-body);
+  background-color: var(--color-primary-bg);
+  background-size: contain;
+  height: var(--viewport-height);
+  width: var(--viewport-width);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Small tablet adjustments (641px - 767px) */
+@media (min-width: 641px) and (max-width: 767px) {
+  .splash-bg {
+    padding-top: 15vh;
+    /* 15% from the top of the viewport */
+  }
+
+  img.splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  img.splash-logo {
+    width: 95%;
+    max-width: 450px;
+  }
+}
+
+/* Desktop-specific adjustments (768px+) */
+@media (min-width: 768px) {
+  .splash-bg {
+    padding-top: 15vh;
+    /* 15% from the top of the viewport */
+  }
+
+  img.splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  img.splash-logo {
+    width: 100%;
+    max-width: 550px;
+  }
+}
+
+/* ========================================
+   FONT DEFINITIONS
+   ======================================== */
+
+@font-face {
+  font-family: "Pacifico";
+  src: url("/assets/fonts/Pacifico.ttf") format("truetype");
+  font-display: swap;
+  /* Better performance */
+}
+
+@font-face {
+  font-family: "NationalPark";
+  src: url("/assets/fonts/NationalPark.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.hidden {
+  display: none !important;
+}
+
+/* Flexbox utilities (replacing Bootstrap) */
+.d-flex {
+  display: flex !important;
+}
+
+.flex-row {
+  flex-direction: row !important;
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+/* Mobile stack layout for contact page */
+.contact.row.stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.contact.row.stack > * {
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+/* Ensure full-width containers for mobile contact elements */
+@media (max-width: 640px) {
+  .contact.conTitle {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-sm);
+    margin: 0;
+  }
+  
+  form.contact.form {
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .contact.form-buttons {
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .contact img {
+    width: 100%;
+    padding: 0 var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+    display: block;
+  }
+}
+
+/* Mobile form styles */
+@media (max-width: 640px) {
+  form.contact {
+    width: 100%;
+    margin: 5% 0;
+  }
+
+  input.contact.btn.submit,
+  input.contact.btn.reset {
+    margin: 2% 1%;
+    min-width: 100px;
+    font-size: 0.9em;
+  }
+
+  h1.contact.conTitle {
+    padding: 5% 0;
+  }
+}
+
+/* Mobile-first: These are the base styles (mobile) */
+.mobile-view {
+  display: block;
+}
+
+.desktop-view {
+  display: none;
+}
+
+/* Form button styles */
+input.contact.btn.submit,
+input.contact.btn.reset {
+  background: var(--color-primary-dark);
+  border: 1px solid var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+  padding: 0.75em 1.25em;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-standard);
+  font-size: var(--font-size-button);
+  min-width: 120px;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+input.contact.btn.submit:hover,
+input.contact.btn.reset:hover {
+  color: var(--color-hover-orange);
+  font-family: var(--font-body);
+}
+
+input.contact.btn.submit:active,
+input.contact.btn.reset:active {
+  color: var(--color-active-gray);
+}
+
+/* Small tablet override (641px - 767px) */
+@media (min-width: 641px) {
+  .mobile-view {
+    display: none;
+  }
+
+  .desktop-view {
+    display: block;
+  }
+}
+
+/* Desktop override (768px+) */
+@media (min-width: 768px) {
+  .mobile-view {
+    display: none;
+  }
+
+  .desktop-view {
+    display: block;
+  }
+}
+
+/* ========================================
+   GRID SYSTEM - Mobile First
+   ======================================== */
+
+.container {
+  width: 75%;
+  /* Mobile: 75% content width (12.5% margin on each side) */
+  max-width: 75%;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Desktop: Add side margins (1/6 on each side = 2/6 total = 4/6 content width) */
+@media (min-width: 641px) {
+  .container {
+    max-width: 66.67%;
+    /* 4/6 of viewport */
+    padding-right: var(--container-padding);
+    padding-left: var(--container-padding);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--container-padding) * -1);
+  margin-left: calc(var(--container-padding) * -1);
+}
+
+.col {
+  flex: 1;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+/* Mobile base: all columns are full width */
+[class*="col-"] {
+  width: var(--spacing-100);
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+/* Tablet and up: responsive columns */
+@media (min-width: 641px) {
+  .col-1 {
+    width: 8.33%;
+  }
+
+  .col-2 {
+    width: 16.66%;
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-5 {
+    width: 41.66%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 58.33%;
+  }
+
+  .col-8 {
+    width: 66.66%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-10 {
+    width: 83.33%;
+  }
+
+  .col-11 {
+    width: 91.66%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   NAVBAR STYLES - Mobile First
+   ======================================== */
+
+/* Base mobile navbar styles */
+nav.navbar.justify-content-center.nav-splash,
+nav.navbar.justify-content-center.nav-other {
+  background-color: var(--color-primary-dark);
+  font-family: var(--font-cursive);
+  height: 3.5em;
+  width: 100vw;
+  /* Full viewport width */
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  width: 100%;
+}
+
+.collapse {
+  background-color: var(--color-primary-dark);
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  right: -75%;
+  /* Start hidden off-screen to the right */
+  width: 75%;
+  /* 75% of screen width */
+  height: 3.5em;
+  /* Same height as navbar */
+  z-index: 999;
+  transition: right 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.collapse.show {
+  right: 12.5%;
+  /* Slide in closer to menu icon - half the original gap */
+}
+
+.navbar-toggler {
+  margin: 0;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  z-index: 1001;
+  /* Stay above the slide-in menu */
+  position: relative;
+}
+
+.navbar-toggler-icon {
+  background-image: url("/assets/images/hamburgerMenu.png") !important;
+  width: 2em;
+  height: 2em;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Overlay backdrop when menu is open */
+.collapse.show::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 87.5%;
+  /* Covers the area not covered by menu (12.5% + 75% = 87.5%) */
+  height: 3.5em;
+  /* Only cover navbar height */
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+nav ul {
+  background-color: var(--color-primary-dark);
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0 1rem;
+  /* Add padding from edges for mobile */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  /* Distribute links evenly for mobile */
+}
+
+nav li {
+  margin: 0;
+  /* Remove margins, let flexbox handle spacing */
+  padding: 0 0.25rem;
+  /* Minimal padding */
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-nav);
+  white-space: nowrap;
+  text-align: center;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+nav a:link,
+nav a:visited {
+  color: var(--color-white);
+  font-size: var(--font-size-link);
+  font-family: var(--font-cursive);
+  text-decoration: none;
+  display: block;
+  /* Make full clickable area */
+}
+
+nav a:hover {
+  color: var(--color-hover-orange) !important;
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-link);
+  transform: translateY(-2px);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Close button styling for mobile menu - hidden for horizontal layout */
+.collapse .close-menu {
+  display: none;
+  /* Not needed for horizontal inline menu */
+}
+
+/* Desktop navbar - different background for splash (768px+) */
+@media (min-width: 768px) {
+  nav.navbar.navbar-expand-sm.justify-content-center.nav-splash {
+    background-color: var(--color-primary-dark);
+    font-family: var(--font-cursive);
+    height: 3.5em;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  nav.navbar.navbar-expand-sm.justify-content-center.nav-other {
+    background-color: var(--color-primary-dark);
+    font-family: var(--font-cursive);
+    display: flex;
+    height: 3.5em;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  /* Reset mobile slide-in styles for desktop */
+  .collapse {
+    position: static;
+    right: auto;
+    width: auto;
+    height: auto;
+    padding-top: 0;
+    background-color: transparent;
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    /* Center nav links */
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+    /* Reset padding for desktop */
+  }
+
+  nav li {
+    margin-left: 3.5vw;
+    margin-right: 3.5vw;
+    font-family: var(--font-cursive);
+    font-size: var(--font-size-nav-desktop);
+    padding: 0.5rem;
+    white-space: normal;
+    /* Allow wrapping on desktop */
+    text-align: center;
+  }
+
+  .container-fluid {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Hide close button on desktop */
+  .collapse .close-menu {
+    display: none;
+  }
+}
+
+/* ========================================
+   SPLASH PAGE - Mobile First
+   ======================================== */
+
+/* Base mobile styles */
+div.splash-bg {
+  min-height: calc(100vh - 15%);
+  height: auto;
+  width: 100%;
+  background-color: var(--color-primary-bg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 15vh;
+  /* 15% from the top of the viewport */
+  box-sizing: border-box;
+  margin: 0;
+  padding-bottom: 2em;
+  /* Add some bottom padding */
+}
+
+/* Container for splash content */
+.splash-bg>.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Mobile view (default) */
+.splash-bg .d-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.splash-bg .col {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.splash-bg img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.splash-bg .splash-graphic {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.splash-bg .splash-logo {
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Desktop view (641px and up) */
+@media (min-width: 641px) {
+  .splash-bg {
+    justify-content: center;
+    padding: 3em 1em 2em;
+  }
+
+  .splash-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4%;
+  }
+
+  .splash-graphic {
+    flex: 1;
+    max-width: 48%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .splash-logo {
+    flex: 1;
+    max-width: 48%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 768px) {
+  img.splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  img.splash-logo {
+    width: 82%;
+    max-width: 82%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    padding: 0 0.5%;
+  }
+
+  img.splash-logo {
+    width: 90%;
+    max-width: 90%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  /* Scale other images */
+  .about img,
+  .project img,
+  .contact img {
+    max-width: 90%;
+    height: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .about img,
+  .project img,
+  .contact img {
+    max-width: 85%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  img.splash-logo {
+    width: 86.25%;
+    max-width: 86.25%;
+  }
+
+  .about img,
+  .project img,
+  .contact img {
+    max-width: 80%;
+  }
+}
+
+/* 1536px breakpoint - Large Desktop */
+@media (min-width: 1536px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  img.splash-logo {
+    width: 87.5%;
+    max-width: 87.5%;
+  }
+
+  .about img,
+  .project img {
+    max-width: 75%;
+    transition: transform 0.3s ease;
+  }
+
+  .contact img {
+    max-width: 75%;
+  }
+
+  .about img:hover,
+  .project img:hover {
+    transform: scale(1.02);
+  }
+
+  .container,
+  div.about.container,
+  div.contact.container,
+  div.project.container {
+    max-width: 70%;
+  }
+
+  .contact.row>.contact.col:last-child {
+    width: 60%;
+  }
+}
+
+/* 1920px breakpoint - Full HD */
+@media (min-width: 1920px) {
+  .splash-container {
+    max-width: 1800px;
+    gap: 3%;
+  }
+
+  .splash-graphic {
+    max-width: 55%;
+  }
+
+  .splash-logo {
+    max-width: 42%;
+  }
+
+  .about img,
+  .project img {
+    max-width: 70%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact img {
+    max-width: 70%;
+  }
+
+  .container,
+  div.about.container,
+  div.contact.container,
+  div.project.container {
+    max-width: 75%;
+  }
+
+  .contact.row>.contact.col:last-child {
+    width: 62%;
+  }
+
+  /* Adjust font sizes for better readability */
+  :root {
+    --font-size-base: calc(16px + 0.4vw);
+    --font-size-h1: 2.2em;
+    --font-size-h1-large: 6.5em;
+    --font-size-nav: 1.7em;
+  }
+}
+
+/* 2560px breakpoint - QHD/2K */
+@media (min-width: 2560px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  img.splash-logo {
+    width: 90%;
+    max-width: 90%;
+  }
+
+  .about img,
+  .project img {
+    max-width: 65%;
+    border-radius: 8px;
+  }
+
+  .contact img {
+    max-width: 65%;
+  }
+
+  .container,
+  div.about.container,
+  div.contact.container,
+  div.project.container {
+    max-width: 80%;
+  }
+
+  .contact.row>.contact.col:last-child {
+    width: 65%;
+  }
+
+  :root {
+    --font-size-base: calc(18px + 0.5vw);
+    --font-size-h1: 2.5em;
+    --font-size-h1-large: 7em;
+    --font-size-nav: 2em;
+    --spacing-md: 2.5em;
+    --spacing-lg: 3em;
+  }
+}
+
+/* 3840px breakpoint - 4K UHD */
+@media (min-width: 3840px) {
+  .splash-bg .splash-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  img.splash-logo {
+    width: 92%;
+    max-width: 92%;
+  }
+
+  .about img,
+  .project img {
+    max-width: 60%;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .contact img {
+    max-width: 60%;
+  }
+
+  .container,
+  div.about.container,
+  div.contact.container,
+  div.project.container {
+    max-width: 85%;
+  }
+
+  .contact.row>.contact.col:last-child {
+    width: 70%;
+  }
+
+  :root {
+    --font-size-base: calc(20px + 0.6vw);
+    --font-size-h1: 3em;
+    --font-size-h1-large: 8em;
+    --font-size-nav: 2.5em;
+    --font-size-button: 1.5em;
+    --spacing-md: 3em;
+    --spacing-lg: 4em;
+    --spacing-xl: 6em;
+  }
+}
+
+img.splash-logo {
+  width: 86.25%;
+  max-width: 86.25%;
+}
+
+/* ========================================
+   ABOUT PAGE - Mobile First
+   ======================================== */
+
+div.about-bg {
+  width: var(--viewport-width);
+  background-color: var(--color-primary-bg);
+  background-size: cover;
+  font-family: var(--font-cursive);
+  text-decoration: none;
+  padding-top: 3.5em;
+  /* Account for fixed navbar */
+}
+
+div.about.container {
+  width: 75%;
+  /* Mobile: 12.5% margin on each side */
+  text-align: center;
+}
+
+.about.cursive {
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-h1);
+  color: var(--color-primary-dark);
+  padding: var(--spacing-md) 0;
+}
+
+.about img {
+  padding: var(--spacing-5);
+}
+
+/* Mobile base - contact images */
+.contact img {
+  width: 75%;
+  /* Mobile: 75% of full-width container */
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.about.aText {
+  text-align: left;
+  padding: var(--spacing-md) var(--spacing-sm);
+  color: var(--color-primary-dark);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+}
+
+/* Desktop about page - add side margins for consistency */
+@media (min-width: 641px) {
+  div.about.container {
+    max-width: 66.67%;
+    /* 4/6 of viewport */
+  }
+}
+
+/* ========================================
+   CONTACT PAGE STYLES - Mobile First
+   ======================================== */
+
+/* Base mobile styles (up to 640px) */
+div.contact-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: var(--color-primary-bg);
+  font-family: var(--font-body);
+  text-decoration: none;
+  overflow-x: hidden;
+  padding-top: 3.5em;
+  /* Account for fixed navbar */
+}
+
+div.contact.container {
+  width: 75%;
+  /* Mobile: 12.5% margin on each side */
+  margin: 0 auto;
+  text-align: center;
+  color: var(--color-white);
+}
+
+form.contact {
+  width: 100%;
+  padding: 0;
+  margin: var(--spacing-5) 0;
+}
+
+input#emailInput.contact.form-control,
+input#firstNameInput.contact.form-control,
+input#lastNameInput.contact.form-control {
+  background-color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+  margin: var(--spacing-2) 0;
+  width: 100%;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+}
+
+input#emailInput.contact.form-control:focus,
+input#firstNameInput.contact.form-control:focus,
+input#lastNameInput.contact.form-control:focus {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  outline: none;
+}
+
+input#emailInput.contact.form-control::placeholder,
+input#firstNameInput.contact.form-control::placeholder,
+input#lastNameInput.contact.form-control::placeholder {
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+}
+
+input#emailInput.contact.form-control:hover::placeholder,
+input#firstNameInput.contact.form-control:hover::placeholder,
+input#lastNameInput.contact.form-control:hover::placeholder {
+  color: var(--color-white);
+  font-family: var(--font-body);
+}
+
+textarea#comments.contact.form-control {
+  resize: none;
+  background-color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  margin: 1.5% 0;
+  width: 100%;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--border-radius);
+  min-height: 150px;
+  font-size: var(--font-size-base);
+}
+
+textarea#comments.contact.form-control:focus {
+  resize: none;
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  outline: none;
+}
+
+textarea#comments.contact.form-control::placeholder {
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+}
+
+textarea#comments.contact.form-control:hover::placeholder {
+  color: var(--color-white);
+  font-family: var(--font-body);
+}
+
+h1.contact.conTitle {
+  text-align: center;
+  font-family: var(--font-cursive);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-h1);
+  padding: var(--spacing-5) 0;
+  margin: 0;
+}
+
+input.contact.btn.submit,
+input.contact.btn.reset {
+  background: var(--color-primary-dark);
+  border: 1px solid var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition-standard);
+  font-size: var(--font-size-button);
+  min-width: 165px;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+input.contact.btn.submit:hover,
+input.contact.btn.reset:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-hover-orange) !important;
+  font-family: var(--font-body);
+}
+
+input.contact.btn.submit:active,
+input.contact.btn.reset:active {
+  background-color: var(--color-primary-dark);
+  color: var(--color-active-gray) !important;
+}
+
+/* Small tablet and up (641px+) */
+@media only screen and (min-width: 641px) {
+  div.contact-bg {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--color-primary-bg);
+    font-family: var(--font-body);
+    text-decoration: none;
+  }
+
+  div.contact.container {
+    width: 66.67%;
+    /* 4/6 of viewport for desktop */
+    margin: 0 auto;
+    text-align: center;
+    color: var(--color-white);
+  }
+
+  .contact.row {
+    display: flex;
+    flex-direction: column;
+    /* stack by default */
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .contact.row>.contact.col {
+    flex: 0 0 auto;
+    padding: 0;
+  }
+
+  .contact.row>.contact.col:first-child {
+    width: 45%;
+  }
+
+  .contact.row>.contact.col:last-child {
+    width: auto;
+    min-width: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  form.contact {
+    width: var(--spacing-80);
+    padding: 0;
+    margin: 2.5% auto;
+  }
+
+  input#emailInput.contact.form-control,
+  input#firstNameInput.contact.form-control,
+  input#lastNameInput.contact.form-control {
+    background-color: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-dark);
+    color: var(--color-white);
+    margin: 1.5% 0;
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+  }
+
+  input#emailInput.contact.form-control:focus,
+  input#firstNameInput.contact.form-control:focus,
+  input#lastNameInput.contact.form-control:focus {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    outline: none;
+  }
+
+  input#emailInput.contact.form-control::placeholder,
+  input#firstNameInput.contact.form-control::placeholder,
+  input#lastNameInput.contact.form-control::placeholder {
+    color: var(--color-white);
+    font-family: var(--font-cursive);
+  }
+
+  input#emailInput.contact.form-control:hover::placeholder,
+  input#firstNameInput.contact.form-control:hover::placeholder,
+  input#lastNameInput.contact.form-control:hover::placeholder {
+    color: var(--color-white);
+    font-family: var(--font-body);
+  }
+
+  textarea#comments.contact.form-control {
+    background-color: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-dark);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    margin: 1.5% 0;
+    width: 100%;
+    padding: var(--input-padding-y) var(--input-padding-x);
+    border-radius: var(--border-radius);
+    min-height: 150px;
+    resize: none;
+    font-size: var(--font-size-base);
+  }
+
+  textarea#comments.contact.form-control:focus {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    outline: none;
+  }
+
+  textarea#comments.contact.form-control::placeholder {
+    color: var(--color-white);
+    font-family: var(--font-cursive);
+  }
+
+  textarea#comments.contact.form-control:hover::placeholder {
+    color: var(--color-white);
+    font-family: var(--font-body);
+  }
+
+  h1.contact.conTitle {
+    text-align: center;
+    font-family: var(--font-cursive);
+    color: var(--color-primary-dark);
+    font-size: var(--font-size-h1);
+    padding: 2.5% 0 0 0;
+    margin: 0;
+  }
+
+  input.contact.btn.submit,
+  input.contact.btn.reset {
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-dark);
+    color: var(--color-white);
+    font-family: var(--font-cursive);
+    padding: var(--input-padding-y) var(--input-padding-x);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-standard);
+    font-size: var(--font-size-button);
+    min-width: 165px;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+  }
+
+  input.contact.btn.submit:hover,
+  input.contact.btn.reset:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-hover-orange) !important;
+    font-family: var(--font-body);
+  }
+
+  input.contact.btn.submit:active,
+  input.contact.btn.reset:active {
+    background-color: var(--color-primary-dark);
+    color: var(--color-active-gray) !important;
+  }
+
+  .contact img {
+    transform: translateY(-15%);
+    width: auto;
+    min-width: 360px;
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+/* Desktop contact page adjustments */
+@media (min-width: 641px) {
+  div.contact.container {
+    max-width: 66.67%;
+    /* 4/6 of viewport */
+  }
+
+  .contact.row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    /* Space between form and image */
+    transform: translateY(var(--spacing-15));
+    margin: 0;
+    /* Remove default row margins */
+  }
+
+  /* Override column grid - use explicit widths */
+  .contact.row>.contact.col {
+    flex: 0 0 auto;
+    /* Don't grow/shrink, use explicit width */
+    padding: 0;
+    /* Remove column padding */
+  }
+
+  /* Form column takes 45% */
+  .contact.row>.contact.col:first-child {
+    width: 45%;
+  }
+
+  /* Image column - width based on number of images */
+  .contact.row>.contact.col:last-child {
+    width: auto;
+    /* Let content determine width */
+    min-width: 360px;
+    /* Minimum width for single image */
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow multiple images to wrap */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    /* Space between images */
+  }
+
+  .contact img {
+    transform: translateY(-15%);
+    width: auto;
+    /* Maintain aspect ratio */
+    min-width: 360px;
+    /* Each image minimum 360px */
+    height: auto;
+    max-width: 100%;
+    /* Ensure image doesn't exceed container */
+  }
+}
+
+/* Medium tablet/desktop (768px+) - grow image container */
+@media (min-width: 768px) {
+  .contact.row {
+    flex-direction: row;
+    /* side-by-side on desktop */
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  .contact.row>.contact.col {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contact.row>.contact.col img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* Large desktop (1024px+) - continue growing container */
+@media (min-width: 1024px) {
+  .contact.row>.contact.col:last-child {
+    width: 55%;
+  }
+}
+
+/* Extra large desktop (1440px+) - maximum container size */
+@media (min-width: 1440px) {
+  .contact.row>.contact.col:last-child {
+    width: 58%;
+  }
+
+  form.contact {
+    width: var(--spacing-80);
+    margin: 2.5% 0;
+  }
+
+  .contact .form-control {
+    margin: 1.5% 0;
+  }
+}
+
+/* ========================================
+   PROJECTS PAGE - Mobile First
+   ======================================== */
+
+div.project-bg {
+  height: var(--viewport-height);
+  width: var(--viewport-width);
+  background-repeat: repeat;
+  background-color: var(--color-primary-bg);
+  background-size: cover;
+  font-family: var(--font-body);
+  text-decoration: none;
+  overflow: hidden;
+  padding-top: 3.5em;
+  /* Account for fixed navbar */
+}
+
+/* Desktop: Add side margins */
+@media (min-width: 641px) {
+  div.project.container {
+    max-width: 66.67%;
+    /* 4/6 of viewport */
+  }
+}
+
+h1.project.projTitle {
+  text-align: center;
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-h1);
+  padding: var(--spacing-5) 0;
+  margin: 0;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+h4.project.nfo {
+  text-align: center;
+  font-weight: bold;
+  color: var(--color-primary-dark);
+  width: var(--spacing-100);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  padding: var(--spacing-lg);
+}
+
+div.project.container {
+  justify-content: center;
+  width: 75%;
+  /* Mobile: 12.5% margin on each side */
+  height: var(--spacing-100);
+  text-align: left;
+  color: var(--color-white);
+  padding: 0;
+  margin: 0 auto;
+}
+
+/* Button group for navigation buttons */
+.project .button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.project.pPic {
+  padding: var(--spacing-sm) 0 0 0;
+  text-align: center;
+  font-size: var(--font-size-body);
+}
+
+button.project.nfo.btn {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  width: var(--spacing-100);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: var(--transition-standard);
+}
+
+button.project.nfo.btn:hover,
+button.project.nfo.btn:active,
+button.project.nfo.btn:focus {
+  color: var(--color-hover-orange) !important;
+}
+
+/* Desktop projects page */
+@media (min-width: 641px) {
+  div.project.container {
+    max-width: 66.67%;
+  }
+
+  h1.project.projTitle {
+    margin: 2.5% 0 0 0;
+  }
+
+  .project .button-group {
+    padding-top: 3rem;
+  }
+
+  .project.pPic {
+    padding: 3em 0 0 0;
+  }
+
+  button.project.nfo.btn {
+    width: var(--spacing-80);
+  }
+}
+
+/* ========================================
+   NOT FOUND PAGE
+   ======================================== */
+
+.notfound-cont.splash-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--color-primary-bg);
+  position: relative;
+}
+
+/* Mobile view (default) */
+.splash-bg .splash {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.splash-bg .splash-graphic {
+  margin-bottom: 2em;
+}
+
+.splash-bg .splash-logo {
+  width: 90%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Desktop view (641px and up) */
+@media (min-width: 641px) {
+  .splash-bg {
+    justify-content: center;
+    padding: 3em 1em 2em;
+  }
+
+  .splash-container {
+    display: flex;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4%;
+  }
+
+  .splash-bg .splash-graphic {
+    flex: 1;
+    max-width: 48%;
+    margin-bottom: 0;
+  }
+
+  .splash-bg .splash-logo {
+    flex: 1;
+    max-width: 48%;
+  }
+}
+
+.notfound-content {
+  text-align: center;
+  color: var(--color-primary-dark);
+}
+
+.notfound-title {
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-h1-large);
+  margin: 0;
+  color: var(--color-primary-dark);
+}
+
+.notfound-subtitle {
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-h1);
+  margin: 20px 0;
+  color: var(--color-primary-dark);
+}
+
+.notfound-text {
+  font-family: var(--font-body);
+  font-size: var(--font-size-button);
+  margin: 20px 0;
+  color: var(--color-primary-dark);
+}
+
+.notfound-link {
+  text-decoration: none;
+}
+
+.notfound-link button {
+  background: var(--color-primary-dark);
+  border: 2px solid var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-button);
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: var(--transition-standard);
+}
+
+.notfound-link button:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-hover-orange) !important;
+}
+
+/* ========================================
+   CONTACT PAGE STYLES
+   ======================================== */
+
+.about-bg,
+.contact-bg,
+.project-bg {
+  background-color: var(--color-primary-bg);
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.about h4,
+.project h4,
+.contact-title {
+  font-family: var(--font-cursive);
+  color: var(--color-primary-dark);
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  padding: 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.contact-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  background: transparent;
+}
+
+.form-control {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: var(--transition-standard);
+  background-color: var(--color-white);
+}
+
+.contact-form .form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(128, 156, 82, 0.25);
+}
+
+/* Textarea styles */
+textarea.form-control {
+  min-height: 120px;
+  resize: none;
+  line-height: 1.5;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Form buttons */
+.form-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 120%;
+  align-items: stretch;
+  margin-left: -10%;
+  margin-right: -10%;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-cursive);
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  flex: 1;
+  min-width: 165px;
+  text-align: center;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .contact-title {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-form {
+    margin: 0;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .about h4,
+  .project h4,
+  .contact-title {
+    font-size: 3.5rem;
+    margin: 0.75rem 0 2rem;
+  }
+}
+
+/* Large desktop styles */
+@media (min-width: 1200px) {
+
+  .about.container,
+  .project.container,
+  .contact-container {
+    padding: 0.5rem 1rem;
+  }
+
+  .contact-grid {
+    gap: 6rem;
+  }
+}
+
+/* ========================================
+   GENERAL BUTTON & FORM STYLES
+   ======================================== */
+
+button.nfo.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-standard);
+  font-family: var(--font-cursive);
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  border-radius: 4px;
+}
+
+button.nfo.btn:hover {
+  color: var(--color-hover-orange);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 4px;
+  transition: var(--transition-standard);
+  background-color: var(--color-white);
+  font-family: var(--font-cursive);
+}
+
+/* ========================================
+   VARIABLE TESTING SECTION
+   Remove this after testing is complete
+   ======================================== */
+
+.css-test-banner {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-cursive);
+  font-size: var(--font-size-h1);
+  text-align: center;
+  padding: var(--spacing-md);
+  border: 3px solid var(--color-hover-orange);
+  margin: var(--spacing-sm);
+  transition: var(--transition-standard);
+}
+
+.css-test-banner:hover {
+  background-color: var(--color-accent);
+  color: var(--color-primary-dark);
+  transform: scale(1.05);
+}
+
+.css-test-grid {
+  background-color: var(--color-white);
+  color: var(--color-primary-dark);
+  font-family: var(--font-body);
+  padding: var(--spacing-sm);
+  margin: var(--spacing-xs);
+  border: 2px solid var(--color-primary-dark);
+  text-align: center;
+}
